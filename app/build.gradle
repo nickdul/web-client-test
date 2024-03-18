@@ -1,0 +1,43 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform("io.netty:netty-bom:$nettyVersion")
+    implementation platform("com.squareup.okhttp3:okhttp-bom:$okhttpVersion")
+
+    implementation 'io.netty:netty-all'
+    implementation "com.squareup.okhttp3:okhttp"
+    implementation "org.asynchttpclient:async-http-client:$ahcVersion"
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.3'
+
+    implementation 'org.hdrhistogram:HdrHistogram:2.1.12'
+
+
+    implementation "com.epam.deltix:gflog-api:$gflogVersion"
+    implementation "com.epam.deltix:gflog-core:$gflogVersion"
+
+    runtimeOnly "com.epam.deltix:gflog-slf4j:$gflogVersion"
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter('5.9.3')
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+application {
+    mainClass = 'deltix.web.client.WebClientTest'
+}
